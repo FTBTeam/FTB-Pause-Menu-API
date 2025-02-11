@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="ARR"
+
+[[mods]]
+modId="ftbpmapi"
+version="${mod_version}"
+displayName="FTB Pause Menu API"
+authors="FTB Team" #optional
+# The description text for the mod (multi line!) )
+description='''
+Unification API for mods modifying the pause menu.
+'''
+
+side="CLIENT"
+
+[[mixins]]
+config="ftbpmapi.mixins.json"
+
+[[dependencies.ftbpmapi]]
+    modId="neoforge"
+    required=true
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="CLIENT"
+
+[[dependencies.ftbpmapi]]
+    modId="minecraft"
+    required=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="CLIENT"
