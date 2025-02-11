@@ -9,10 +9,10 @@ plugins {
 }
 
 group = 'dev.ftb.mods'
-version = '21.1.0'
+version = mod_version
 
 base {
-    archivesName = mod_id
+    archivesName = "ftb-pause-menu-api"
 }
 
 apply from: "https://raw.githubusercontent.com/FTBTeam/mods-meta/main/gradle/publishing.gradle"
@@ -122,10 +122,22 @@ processResources {
     }
 }
 
+// Create a jar just containing the api package
+tasks.register('apiJar', Jar) {
+    archiveClassifier.set('api')
+    from sourceSets.main.output
+    include 'dev/ftb/mods/pmapi/api/**'
+}
+
+tasks.named('jar').configure {
+    dependsOn 'apiJar'
+}
+
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
             from components.java
+            artifact apiJar
         }
     }
 
@@ -153,19 +165,19 @@ publishMods {
     def cfToken = providers.environmentVariable("CURSEFORGE_KEY")
 
     dryRun = !cfToken.isPresent()
-    changelog = "Changelog"
+    changelog = file("CHANGELOG.md").text
     file = jar.archiveFile
     displayName = "[NEOFORGE] FTB Pause Menu API ${project.version}"
     modLoaders.add("neoforge")
 
-    // TODO: Fix
-    type = STABLE
-//    type = stability == "alpha" ? ALPHA : (stability == "beta" ? BETA : STABLE)
+    def tag = providers.environmentVariable("TAG").getOrElse("release")
+    type = tag.endsWith("-beta") ? BETA : (tag.endsWith("-alpha") ? ALPHA : STABLE)
 
     curseforge {
         accessToken = cfToken.isPresent() ? cfToken.get() : ""
         minecraftVersions.add(minecraft_version)
 
         projectId = curseforge_id
+        additionalFiles.from(apiJar.archiveFile)
     }
 }
