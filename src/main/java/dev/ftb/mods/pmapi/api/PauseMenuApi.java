@@ -8,22 +8,12 @@ import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 
-public class PauseMenuApi {
+public enum PauseMenuApi {
+    INSTANCE;
+
     public static final String MOD_ID = "ftbpmapi";
 
-    private static boolean initialized = false;
-
-    public static PauseMenuApi INSTANCE = new PauseMenuApi();
-
     private final EnumMap<MenuLocation, HashSet<PauseItemHolder>> pauseItems = new EnumMap<>(MenuLocation.class);
-
-    private PauseMenuApi() {
-        if (initialized) {
-            throw new RuntimeException("Pause Menu API has already been initialized!");
-        }
-
-        initialized = true;
-    }
 
     public static PauseMenuApi get() {
         return INSTANCE;
