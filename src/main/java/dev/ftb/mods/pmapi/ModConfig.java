@@ -26,8 +26,8 @@ public class ModConfig {
 
         builder.push("supportLinks");
         builder.comment("Support links that can be configured for the built in support links");
-        this.discordLink = builder.comment("The Discord link to open when the Discord button is clicked").define("discordLink", "https://go.ftb.team/discord");
-        this.githubLink = builder.comment("The GitHub link to open when the GitHub button is clicked").define("githubLink", "https://go.ftb.team/support-modpack");
+        this.discordLink = builder.comment("The Discord link to open when the Discord button is clicked").define("discordLink", "");
+        this.githubLink = builder.comment("The GitHub link to open when the GitHub button is clicked").define("githubLink", "");
         builder.pop();
 
         builder.push("removeButtons");
