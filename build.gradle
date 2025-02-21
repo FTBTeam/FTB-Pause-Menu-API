@@ -15,6 +15,7 @@ base {
     archivesName = "ftb-pause-menu-api"
 }
 
+apply from: 'https://raw.githubusercontent.com/FTBTeam/mods-meta/main/gradle/changelog.gradle'
 apply from: "https://raw.githubusercontent.com/FTBTeam/mods-meta/main/gradle/publishing.gradle"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -165,7 +166,7 @@ publishMods {
     def cfToken = providers.environmentVariable("CURSEFORGE_KEY")
 
     dryRun = !cfToken.isPresent()
-    changelog = file("CHANGELOG.md").text
+    changelog = createChangelog(project).trim()
     file = jar.archiveFile
     displayName = "[NEOFORGE] FTB Pause Menu API ${project.version}"
     modLoaders.add("neoforge")
