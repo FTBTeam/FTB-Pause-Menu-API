@@ -164,8 +164,6 @@ public class PauseMenuScreen extends OriginalPauseScreenImpl {
                 int xPlacement = renderX + xOffset;
                 int yPlacement = renderY + yOffset;
 
-                System.out.printf("Adding item %s at %d, %d\n", item.provider().getClass().getSimpleName(), xPlacement, yPlacement);
-
                 placements.add(new ItemPlacement(item, xPlacement, yPlacement, item.provider().hasRender()));
                 xOffset += itemWidth + 4;
             }
