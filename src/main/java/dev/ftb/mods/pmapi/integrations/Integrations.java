@@ -6,6 +6,7 @@ public class Integrations {
     public static void init() {
         runIfLoaded("tipsmod", TipsIntegration::init);
         runIfLoaded("justzoom", JustZoomIntegration::init);
+        runIfLoaded("create", CreateIntegration::init);
     }
 
     private static void runIfLoaded(String modid, Runnable runnable) {
