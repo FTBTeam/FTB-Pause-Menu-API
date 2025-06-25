@@ -93,6 +93,7 @@ repositories {
 dependencies {
     def tipsEnabled = true
     def justZoomEnabled = true
+    def createEnabled = true
 
     if (tipsEnabled) {
         implementation "curse.maven:tips-306549:5844057"
@@ -103,6 +104,10 @@ dependencies {
     if (justZoomEnabled) {
         implementation "curse.maven:just-zoom-561885:5619666"
         runtimeOnly "curse.maven:konkrete-410295:5453385"
+    }
+
+    if (createEnabled) {
+        implementation "curse.maven:create-328085:6641610"
     }
 }
 
@@ -168,7 +173,7 @@ publishMods {
     dryRun = !cfToken.isPresent()
     changelog = createChangelog(project).trim()
     file = jar.archiveFile
-    displayName = "[NEOFORGE] FTB Pause Menu API ${project.version}"
+    displayName = "FTB Pause Menu API ${project.version}"
     modLoaders.add("neoforge")
 
     def tag = providers.environmentVariable("TAG").getOrElse("release")
